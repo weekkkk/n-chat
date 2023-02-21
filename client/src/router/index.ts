@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: '',
     path: '',
-    component: () => import('@/layouts/default-layout.vue'),
+    component: () => import('@/layouts/form-layout.vue'),
     redirect: { name: AUTHORIZATION },
     children: [Authorization],
   },

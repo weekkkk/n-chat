@@ -1,7 +1,25 @@
 <script lang="ts" setup></script>
 
 <template>
-  <RouterView />
+  <main class="f jc-c">
+    <RouterView />
+  </main>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss">
+body {
+  padding: var(--n-indent-4);
+  min-height: 100vh;
+  display: flex;
+  #app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    main {
+      max-width: 1024px;
+      width: 100%;
+    }
+  }
+}
+</style>
