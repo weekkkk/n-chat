@@ -1,12 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { AUTHORIZATION } from './names';
 /**
- * * Главная
+ * * Авторизация
  */
-const Main: RouteRecordRaw = {
+const Authorization: RouteRecordRaw = {
   name: AUTHORIZATION,
   path: AUTHORIZATION,
   meta: { Title: 'Авторизация' },
-  component: () => import('@/pages/authorization.vue'),
+  component: () => import('@/pages/authorization-page.vue'),
 };
-export default Main;
+export default Authorization;

@@ -1,0 +1,14 @@
+@import './global/index';
+@import './components/index';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--n-fs-p);
+  line-height: var(--n-lh-regular);
+  color: var(--n-base);
+}

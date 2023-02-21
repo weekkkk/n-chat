@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  publicPath: '/cornelius/',
+  publicPath: '/n-chat/',
   transpileDependencies: true
 })
