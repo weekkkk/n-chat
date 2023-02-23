@@ -1,11 +1,7 @@
-<script lang="ts" setup>
-import DefaultLayout from './layouts/default-layout.vue';
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <DefaultLayout>
-    <RouterView />
-  </DefaultLayout>
+  <RouterView />
 </template>
 
 <style lang="scss">
@@ -20,7 +16,7 @@ a {
   text-decoration: underline;
   &:hover {
     filter: brightness(110%);
-  text-decoration: none;
+    text-decoration: none;
   }
   &:active {
     filter: brightness(90%);

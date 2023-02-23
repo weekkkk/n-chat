@@ -68,6 +68,7 @@ const props = defineProps({
   --n-button-bw: var(--n-ctrl-bw);
   --n-button-bc: var(--n-ctrl-bc);
   --n-button-br: var(--n-ctrl-br);
+  --n-button-ts: var(--n-ctrl-ts);
   --n-button-fw: 500;
 }
 </style>
@@ -84,6 +85,7 @@ $bw: var(--n-button-bw);
 $bc: var(--n-button-bc);
 $br: var(--n-button-br);
 $fw: var(--n-button-fw);
+$ts: var(--n-button-ts);
 .n-button {
   cursor: pointer;
   border: none;
@@ -101,6 +103,7 @@ $fw: var(--n-button-fw);
   color: $tx;
   gap: $px;
   font-weight: $fw;
+  transition: $ts;
   i.icon {
     line-height: 1;
     font-size: $is;

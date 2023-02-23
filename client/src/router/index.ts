@@ -3,16 +3,30 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from 'vue-router';
-import { Authorization } from './modules';
-import { AUTHORIZATION } from './modules/names';
+import { Authorization, Chat } from './modules';
+import { AUTHORIZATION, CHAT } from './modules/names';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    name: '',
-    path: '',
-    component: () => import('@/layouts/form-layout.vue'),
-    redirect: { name: AUTHORIZATION },
-    children: [Authorization],
+    path: '/',
+    redirect: { name: 'default' },
+    component: () => import('@/layouts/default-layout.vue'),
+    children: [
+      {
+        name: 'forms',
+        path: 'forms',
+        component: () => import('@/layouts/form-layout.vue'),
+        redirect: { name: AUTHORIZATION },
+        children: [Authorization],
+      },
+      {
+        name: 'default',
+        path: 'default',
+        component: () => import('@/layouts/base-layout.vue'),
+        redirect: { name: CHAT },
+        children: [Chat],
+      },
+    ],
   },
 ];
 const router = createRouter({

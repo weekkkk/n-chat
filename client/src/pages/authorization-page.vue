@@ -71,7 +71,9 @@ function enter() {
   </div>
 
   <div class="f jc-c ai-c cg-4">
-    <NButton @click="enter" :color="EColor.Brand" :size="ESize.Large"> войти </NButton>
+    <NButton @click="enter" :color="EColor.Brand" :size="ESize.Large">
+      войти
+    </NButton>
     <a class="c-brand"> Регистрация </a>
   </div>
 </template>
@@ -88,6 +90,11 @@ function enter() {
   &-row {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    column-gap: var(--n-indent-3);
+    row-gap: var(--n-indent-2);
+    @media (max-width: 532px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 

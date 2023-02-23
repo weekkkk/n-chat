@@ -2,4 +2,8 @@
  * * Авторизация
  */
 import Authorization from './authorization';
-export { Authorization };
+/**
+ * * Чат
+ */
+import Chat from './chat';
+export { Authorization, Chat };
