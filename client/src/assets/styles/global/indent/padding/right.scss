@@ -1,7 +1,7 @@
 :root {
     // PADDING RIGHT
     .pr-0 {
-        padding-right: var(--n-indent-0);
+        padding-right: var(--n-indent-0) !important;
     }
     .pr-1 {
         padding-right: var(--n-indent-1);

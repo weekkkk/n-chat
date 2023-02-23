@@ -12,3 +12,8 @@ html {
   font-weight: var(--n-fw-regular);
   color: var(--n-base);
 }
+
+ul, li {
+  text-decoration: none;
+  list-style: none;
+}

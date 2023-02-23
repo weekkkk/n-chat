@@ -7,6 +7,11 @@ const Chat: RouteRecordRaw = {
   name: CHAT,
   path: CHAT,
   meta: { Title: 'Чат' },
-  component: () => import('@/pages/chat-page.vue'),
+  components: {
+    aside: () => import('@/pages/dialogs-page.vue'),
+    header: () => import('@/pages/messages-page.vue'),
+    body: () => import('@/pages/messages-page.vue'),
+    footer: () => import('@/pages/messages-page.vue'),
+  },
 };
 export default Chat;
