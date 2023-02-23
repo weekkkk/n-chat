@@ -43,7 +43,7 @@ const panelVisible = ref(true);
       </NButton>
     </header>
 
-    <div class="h-100 bg-default br-3 p-3">
+    <div class="h-100 bg-default br-3 py-3">
       <RouterView name="body" />
     </div>
 
@@ -78,6 +78,10 @@ main {
   }
   > section {
     transition: var(--n-ctrl-ts);
+    height: calc(100vh - var(--n-indent-4) * 2);
+    > div {
+      overflow: hidden;
+    }
   }
 
   @media (max-width: 768px) {

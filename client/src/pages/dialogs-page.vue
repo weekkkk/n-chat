@@ -30,9 +30,15 @@ ul.dialogs {
   overflow-y: auto;
   overflow-x: hidden;
   li {
-    border-bottom: 1px solid var(--n-second-0);
+    border-bottom: 2px dotted var(--n-second-0);
     &:first-child {
-      border-top: 1px solid var(--n-second-0);
+      border-top: 2px dotted var(--n-second-0);
+      border-top-right-radius: var(--n-indent-3);
+      border-top-left-radius: var(--n-indent-3);
+    }
+    &:last-child {
+      border-bottom-right-radius: var(--n-indent-3);
+      border-bottom-left-radius: var(--n-indent-3);
     }
   }
 }

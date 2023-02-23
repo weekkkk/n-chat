@@ -162,6 +162,9 @@ $ts: var(--n-button-ts);
     &-square {
       --n-button-px: 0;
       --n-button-py: 0;
+      height: $sz;
+      width: $sz;
+      aspect-ratio: 1;
     }
     &-disabled {
       cursor: not-allowed;
