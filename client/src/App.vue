@@ -1,4 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+if (localStorage.getItem('token')) {
+  userStore.checkAuth();
+}
+</script>
 
 <template>
   <RouterView />

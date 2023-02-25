@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 
@@ -8,4 +9,6 @@ import './assets/fonts/MaterialSymbolsRounded/index.scss';
 
 const app = createApp(App);
 
-app.use(router).mount('#app');
+const pinia = createPinia();
+
+app.use(pinia).use(router).mount('#app');

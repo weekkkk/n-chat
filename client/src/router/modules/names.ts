@@ -1,7 +1,7 @@
 /**
  * * Авторизация
  */
-export const AUTHORIZATION = 'authorization';
+export const LOGIN = 'login';
 /**
  * * Чат
  */

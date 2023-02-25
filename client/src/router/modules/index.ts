@@ -1,9 +1,9 @@
 /**
  * * Авторизация
  */
-import Authorization from './authorization';
+import Login from './login';
 /**
  * * Чат
  */
 import Chat from './chat';
-export { Authorization, Chat };
+export { Login, Chat };
