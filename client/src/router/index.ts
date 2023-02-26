@@ -26,6 +26,15 @@ const routes: Array<RouteRecordRaw> = [
         redirect: { name: CHAT },
         children: [Chat],
       },
+      {
+        name: 'test',
+        path: 'test',
+        meta: { title: 'диалоги' },
+        components: {
+          header: import('@/layouts/header-layout.vue'),
+          default: () => import('@/layouts/base-layout.vue'),
+        },
+      },
     ],
   },
 ];

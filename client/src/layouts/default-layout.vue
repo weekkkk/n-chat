@@ -1,7 +1,8 @@
 <script lang="ts" setup></script>
 
 <template>
-  <main class="f jc-c">
+  <RouterView name="header" />
+  <main>
     <RouterView />
   </main>
 </template>
@@ -11,14 +12,19 @@ body {
   padding: var(--n-indent-3);
   min-height: 100vh;
   display: flex;
+  justify-content: center;
   #app {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 1024px;
     width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: var(--n-indent-3);
     main {
-      max-width: 1024px;
       width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

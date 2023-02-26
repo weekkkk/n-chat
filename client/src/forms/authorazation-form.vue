@@ -39,7 +39,7 @@ function registration() {
  */
 function login() {
   userStore.login(email.value, password.value).then(() => {
-    router.push({ name: CHAT });
+    router.push({ name: 'test' });
   });
 }
 /**
