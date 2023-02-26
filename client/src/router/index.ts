@@ -3,7 +3,7 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from 'vue-router';
-import { Login, Registration, Chat } from './modules';
+import { Login, Registration, Activation, Chat } from './modules';
 import { LOGIN, CHAT } from './modules/names';
 
 const routes: Array<RouteRecordRaw> = [
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'forms',
         component: () => import('@/layouts/form-layout.vue'),
         redirect: { name: LOGIN },
-        children: [Login, Registration],
+        children: [Login, Registration, Activation],
       },
       {
         name: 'default',
@@ -36,9 +36,28 @@ const router = createRouter({
 export { routes };
 export default router;
 
+import { useUserStore } from '@/stores/user';
+import { REGISTRATION } from './modules/names';
+
 router.beforeEach(async (to, from, next) => {
   const { title } = to.meta;
   const brand = '';
   document.title = `${brand}${title as string}`;
+
+  // const userStore = useUserStore();
+
+  // if (!userStore.isAuth && localStorage.getItem('token')) {
+  //   await userStore.checkAuth();
+  // }
+  // if (!userStore.isAuth && to.name != LOGIN && to.name != REGISTRATION) {
+  //   next({ name: LOGIN });
+  // } else if (
+  //   userStore.isAuth &&
+  //   (to.name == LOGIN || to.name == REGISTRATION)
+  // ) {
+  //   next({ name: CHAT });
+  // } else {
+  //   next();
+  // }
   next();
 });

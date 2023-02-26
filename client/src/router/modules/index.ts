@@ -7,7 +7,11 @@ import Login from './login';
  */
 import Registration from './registration';
 /**
+ * * Активация
+ */
+import Activation from './activation';
+/**
  * * Чат
  */
 import Chat from './chat';
-export { Login, Registration, Chat };
+export { Login, Registration, Activation, Chat };

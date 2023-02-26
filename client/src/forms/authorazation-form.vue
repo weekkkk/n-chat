@@ -7,7 +7,6 @@ import { EColor, ESize } from '@/components/enums';
 import { useRoute, useRouter } from 'vue-router';
 import { REGISTRATION, LOGIN } from '@/router/modules/names';
 import { useUserStore } from '@/stores/user';
-import { Login } from '@/router/modules';
 
 const route = useRoute();
 const router = useRouter();
