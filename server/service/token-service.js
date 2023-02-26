@@ -55,7 +55,7 @@ class TokenService {
   }
 
   async deleteUserToken(userId) {
-    const tokenData = await TokenModel.deleteOne({ userId });
+    const tokenData = await TokenModel.deleteOne({ user: userId });
     return tokenData;
   }
 }

@@ -5,7 +5,7 @@ import { EType } from '@/components/input/enums';
 import NButton from '@/components/button/n-button.vue';
 import { EColor, ESize } from '@/components/enums';
 import { useRoute, useRouter } from 'vue-router';
-import { REGISTRATION, LOGIN } from '@/router/modules/names';
+import { REGISTRATION, LOGIN, ACTIVATION, CHAT } from '@/router/modules/names';
 import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
@@ -30,21 +30,17 @@ const userStore = useUserStore();
  * * Регистрация
  */
 function registration() {
-  if (!isRegistartion.value) {
-    router.push({ name: REGISTRATION });
-    return;
-  }
-  userStore.registration(email.value, password.value);
+  userStore.registration(email.value, password.value).then(() => {
+    router.push({ name: ACTIVATION });
+  });
 }
 /**
  * * Авторизация
  */
 function login() {
-  if (isRegistartion.value) {
-    router.push({ name: LOGIN });
-    return;
-  }
-  userStore.login(email.value, password.value);
+  userStore.login(email.value, password.value).then(() => {
+    router.push({ name: CHAT });
+  });
 }
 /**
  * * Тип инпута с паролем

@@ -45,9 +45,9 @@ class UserService {
         `Пользователь с id ${userId} уже активировал аккаун`
       );
     }
-    user = await UserModel.findByIdAndDelete(userId);
+    const userData = await UserModel.findByIdAndDelete(userId);
     const tokenData = await tokenService.deleteUserToken(userId);
-    return { user, tokenData };
+    return { userData, tokenData };
   }
 
   async activate(activationLink) {

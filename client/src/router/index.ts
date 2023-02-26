@@ -4,7 +4,7 @@ import {
   type RouteRecordRaw,
 } from 'vue-router';
 import { Login, Registration, Activation, Chat } from './modules';
-import { LOGIN, CHAT } from './modules/names';
+import { LOGIN, CHAT, ACTIVATION } from './modules/names';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -44,20 +44,30 @@ router.beforeEach(async (to, from, next) => {
   const brand = '';
   document.title = `${brand}${title as string}`;
 
-  // const userStore = useUserStore();
+  const userStore = useUserStore();
 
-  // if (!userStore.isAuth && localStorage.getItem('token')) {
-  //   await userStore.checkAuth();
-  // }
-  // if (!userStore.isAuth && to.name != LOGIN && to.name != REGISTRATION) {
-  //   next({ name: LOGIN });
-  // } else if (
-  //   userStore.isAuth &&
-  //   (to.name == LOGIN || to.name == REGISTRATION)
-  // ) {
-  //   next({ name: CHAT });
-  // } else {
-  //   next();
-  // }
-  next();
+  if (!userStore.user && localStorage.getItem('token')) {
+    await userStore.checkAuth();
+  }
+
+  console.log(userStore.user);
+
+  if (!userStore.user && to.name != LOGIN && to.name != REGISTRATION) {
+    next({ name: LOGIN });
+  } else if (
+    userStore.user &&
+    userStore.user.isActivated &&
+    (to.name == LOGIN || to.name == REGISTRATION || to.name == ACTIVATION)
+  ) {
+    next({ name: CHAT });
+  } else if (
+    userStore.user &&
+    !userStore.user.isActivated &&
+    to.name != ACTIVATION
+  ) {
+    next({ name: ACTIVATION });
+  } else {
+    next();
+  }
+  // next();
 });
