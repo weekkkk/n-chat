@@ -6,7 +6,7 @@ import { LOGIN } from './names';
 const Login: RouteRecordRaw = {
   name: LOGIN,
   path: LOGIN,
-  meta: { Title: 'Авторизация' },
-  component: () => import('@/pages/login-page.vue'),
+  meta: { title: 'Вход' },
+  component: () => import('@/forms/authorazation-form.vue'),
 };
 export default Login;

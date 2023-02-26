@@ -87,6 +87,7 @@ $br: var(--n-button-br);
 $fw: var(--n-button-fw);
 $ts: var(--n-button-ts);
 .n-button {
+  font-family: inherit;
   cursor: pointer;
   border: none;
   outline: none;
@@ -134,6 +135,7 @@ $ts: var(--n-button-ts);
     }
     &-second {
       --n-button-bg: var(--n-second-100);
+      --n-button-bc: var(--n-second-75) !important;
     }
     &-brand {
       --n-button-bg: var(--n-brand);

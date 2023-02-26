@@ -8,7 +8,7 @@
 
 <style lang="scss">
 body {
-  padding: var(--n-indent-4);
+  padding: var(--n-indent-3);
   min-height: 100vh;
   display: flex;
   #app {

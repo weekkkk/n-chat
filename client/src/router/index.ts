@@ -3,13 +3,13 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from 'vue-router';
-import { Login, Chat } from './modules';
+import { Login, Registration, Chat } from './modules';
 import { LOGIN, CHAT } from './modules/names';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: { name: 'default' },
+    redirect: { name: 'forms' },
     component: () => import('@/layouts/default-layout.vue'),
     children: [
       {
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'forms',
         component: () => import('@/layouts/form-layout.vue'),
         redirect: { name: LOGIN },
-        children: [Login],
+        children: [Login, Registration],
       },
       {
         name: 'default',
@@ -37,8 +37,8 @@ export { routes };
 export default router;
 
 router.beforeEach(async (to, from, next) => {
-  const { Title } = to.meta;
+  const { title } = to.meta;
   const brand = '';
-  document.title = `${brand}${Title as string}`;
+  document.title = `${brand}${title as string}`;
   next();
 });
