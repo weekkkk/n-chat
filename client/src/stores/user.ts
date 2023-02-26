@@ -34,6 +34,18 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  async function cancelRegistration(userId: string) {
+    try {
+      const response = await AuthService.cancelRegistration(userId);
+      console.log(response);
+      localStorage.removeItem('token');
+      isAuth.value = false;
+      user.value = undefined;
+    } catch (e: any) {
+      console.log(e.response?.data?.message);
+    }
+  }
+
   async function logout() {
     try {
       await AuthService.logout();
@@ -59,5 +71,13 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  return { user, isAuth, login, registration, logout, checkAuth };
+  return {
+    user,
+    isAuth,
+    login,
+    registration,
+    cancelRegistration,
+    logout,
+    checkAuth,
+  };
 });

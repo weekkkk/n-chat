@@ -17,6 +17,12 @@ export default class AuthService {
     return $api.post<AuthResponse>('/registration', { email, password });
   }
 
+  static async cancelRegistration(
+    userId: string
+  ): Promise<AxiosResponse<void>> {
+    return $api.post('/cancelRegistration', { userId });
+  }
+
   static async logout(): Promise<void> {
     return $api.post('/logout');
   }

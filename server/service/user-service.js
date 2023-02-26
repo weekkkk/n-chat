@@ -35,6 +35,21 @@ class UserService {
     };
   }
 
+  async cancelRegistartion(userId) {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      throw ApiError.BadRequest(`Пользователь с id ${userId} не найден`);
+    }
+    if (user.isActivated) {
+      throw ApiError.BadRequest(
+        `Пользователь с id ${userId} уже активировал аккаун`
+      );
+    }
+    user = await UserModel.findByIdAndDelete(userId);
+    const tokenData = await tokenService.deleteUserToken(userId);
+    return { user, tokenData };
+  }
+
   async activate(activationLink) {
     const user = await UserModel.findOne({ activationLink });
     if (!user) {

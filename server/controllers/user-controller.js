@@ -23,6 +23,17 @@ class UserController {
     }
   }
 
+  async cancelRegistartion(req, res, next) {
+    try {
+      const { userId } = req.body;
+      const data = userService.cancelRegistartion(userId);
+      res.clearCookie('refreshToken');
+      return res.json(data);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async login(req, res, next) {
     try {
       const { email, password } = req.body;
