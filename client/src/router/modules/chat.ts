@@ -6,12 +6,10 @@ import { CHAT } from './names';
 const Chat: RouteRecordRaw = {
   name: CHAT,
   path: CHAT,
-  meta: { Title: 'Чат' },
+  meta: { title: 'Чат' },
   components: {
-    aside: () => import('@/pages/dialogs-page.vue'),
-    // header: () => import('@/pages/messages-page.vue'),
-    body: () => import('@/pages/messages-page.vue'),
-    footer: () => import('@/pages/input-page.vue'),
+    header: () => import('@/layouts/header-layout.vue'),
+    default: () => import('@/layouts/base-layout.vue'),
   },
 };
 export default Chat;

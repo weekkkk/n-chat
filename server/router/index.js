@@ -1,8 +1,11 @@
-const Router = require('express').Router;
+const express = require('express');
+const expressWs = require('express-ws');
+const router = express.Router();
+const wsInstance = expressWs(router);
+
 const userController = require('../controllers/user-controller');
-const router = Router();
-const { body } = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
+const { body } = require('express-validator');
 
 router.post(
   '/registration',
@@ -15,6 +18,18 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
+
 router.get('/users', authMiddleware, userController.getUsers);
+
+router.get('/dialogs/:userId');
+router.get('/messages/:dialogId');
+
+router.ws('/ws', (ws, req) => {
+  console.log('ПОДКЛЮЧЕНИЕ УСТАНОВЛЕНО');
+
+  ws.on('message', (msg) => {
+    console.log(`Message: ${msg}`);
+  });
+});
 
 module.exports = router;

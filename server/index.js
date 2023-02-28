@@ -1,13 +1,16 @@
 require('dotenv').config();
 const express = require('express');
+const expressWs = require('express-ws');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const router = require('./router/index');
+const router = require('./router');
 const errorMiddleware = require('./middlewares/error-middleware');
 
 const PORT = process.env.PORT || 5000;
+
 const app = express();
+const wsInstance = expressWs(app);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -19,6 +22,12 @@ app.use(
 );
 app.use('/api', router);
 app.use(errorMiddleware);
+
+// app.ws('/', function (ws, req) {
+//   console.log('ПОДКЛЮЧЕНИЕ УСТАНОВЛЕНО');
+//   ws.on('connection', function () {});
+//   console.log('socket', req.testing);
+// });
 
 const start = async () => {
   try {
