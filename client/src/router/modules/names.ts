@@ -14,3 +14,7 @@ export const REGISTRATION = 'registration';
  * * Чат
  */
 export const CHAT = 'chat';
+/**
+ * * Пользователи
+ */
+export const USERS = 'users';

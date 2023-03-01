@@ -112,7 +112,11 @@ class UserService {
   }
 
   async getAllUsers() {
-    const users = await userModel.find();
+    let users = await userModel.find();
+    users = users.map((user) => {
+      user = new UserDto(user);
+      return user;
+    });
     return users;
   }
 }

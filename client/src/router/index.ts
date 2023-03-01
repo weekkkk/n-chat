@@ -3,23 +3,64 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from 'vue-router';
-import { Login, Registration, Activation, Chat } from './modules';
+import { Login, Registration, Activation, Chat, Users } from './modules';
 import { LOGIN, CHAT, ACTIVATION } from './modules/names';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: { name: 'forms' },
     component: () => import('@/layouts/default-layout.vue'),
     children: [
       {
-        name: 'forms',
-        path: 'forms',
+        path: '',
         component: () => import('@/layouts/form-layout.vue'),
-        redirect: { name: LOGIN },
-        children: [Login, Registration, Activation],
+        redirect: { name: 'registration' },
+        children: [
+          {
+            name: 'registration',
+            path: 'registration',
+            component: () => import('@/forms/authorazation-form.vue'),
+          },
+          {
+            name: 'login',
+            path: 'login',
+            component: () => import('@/forms/authorazation-form.vue'),
+          },
+          {
+            name: 'activation',
+            path: 'activation',
+            component: () => import('@/forms/activation-form.vue'),
+          },
+        ],
       },
-      Chat,
+      {
+        path: '',
+        components: {
+          header: () => import('@/layouts/header-layout.vue'),
+          default: () => import('@/layouts/chat-layout.vue'),
+        },
+        children: [
+          {
+            name: 'chat',
+            path: 'chat',
+            component: () => import('@/pages/users-page.vue'),
+          },
+        ],
+      },
+      {
+        path: '',
+        components: {
+          header: () => import('@/layouts/header-layout.vue'),
+          default: () => import('@/layouts/box-layout.vue'),
+        },
+        children: [
+          {
+            name: 'users',
+            path: 'users',
+            component: () => import('@/pages/users-page.vue'),
+          },
+        ],
+      },
     ],
   },
 ];
@@ -36,15 +77,13 @@ import { REGISTRATION } from './modules/names';
 router.beforeEach(async (to, from, next) => {
   const { title } = to.meta;
   const brand = '';
-  document.title = `${brand}${title as string}`;
+  if (title) document.title = `${brand}${title as string}`;
 
   const userStore = useUserStore();
 
   if (!userStore.user && localStorage.getItem('token')) {
     await userStore.checkAuth();
   }
-
-  console.log(userStore.user);
 
   if (!userStore.user && to.name != LOGIN && to.name != REGISTRATION) {
     next({ name: LOGIN });
@@ -53,7 +92,7 @@ router.beforeEach(async (to, from, next) => {
     userStore.user.isActivated &&
     (to.name == LOGIN || to.name == REGISTRATION || to.name == ACTIVATION)
   ) {
-    next({ name: CHAT });
+    next({ name: 'users' });
   } else if (
     userStore.user &&
     !userStore.user.isActivated &&
@@ -63,5 +102,4 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next();
   }
-  // next();
 });

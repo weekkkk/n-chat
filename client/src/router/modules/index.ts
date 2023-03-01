@@ -14,4 +14,8 @@ import Activation from './activation';
  * * Чат
  */
 import Chat from './chat';
-export { Login, Registration, Activation, Chat };
+/**
+ * * Пользователи
+ */
+import Users from './users';
+export { Login, Registration, Activation, Chat, Users };

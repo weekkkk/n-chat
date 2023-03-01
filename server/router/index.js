@@ -28,6 +28,14 @@ router.ws('/ws', (ws, req) => {
   console.log('ПОДКЛЮЧЕНИЕ УСТАНОВЛЕНО');
 
   ws.on('message', (msg) => {
+    const { event } = JSON.parse(msg);
+
+    switch (event) {
+      case 'create-dialog':
+        break;
+      case 'send-message':
+        break;
+    }
     console.log(`Message: ${msg}`);
   });
 });

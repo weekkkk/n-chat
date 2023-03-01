@@ -12,7 +12,7 @@ const title = computed(() => route.meta.title as string);
   <section class="form-layout br-3 f bg-default fd-col p-3 g-4">
     <div class="form-row g-3">
       <h3 class="lh-no">n<span class="c-brand">chat</span></h3>
-      <h2 class="lh-no ta-c">{{ title.toLowerCase() }}</h2>
+      <h2 v-if="title" class="lh-no ta-c">{{ title.toLowerCase() }}</h2>
     </div>
     <RouterView />
   </section>

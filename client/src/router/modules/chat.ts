@@ -9,7 +9,7 @@ const Chat: RouteRecordRaw = {
   meta: { title: 'Чат' },
   components: {
     header: () => import('@/layouts/header-layout.vue'),
-    default: () => import('@/layouts/base-layout.vue'),
+    default: () => import('@/layouts/chat-layout.vue'),
   },
 };
 export default Chat;

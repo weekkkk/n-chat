@@ -2,6 +2,7 @@ import { API_URL } from '@/http';
 import { IUser } from '@/models/IUser';
 import { AuthResponse } from '@/models/response/AuthResponse';
 import AuthService from '@/services/AuthService';
+import UserService from '@/services/UserService';
 import axios from 'axios';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -39,7 +40,6 @@ export const useUserStore = defineStore('user', () => {
       const response = await AuthService.cancelRegistration(userId);
       console.log(response);
       localStorage.removeItem('token');
-      // isAuth.value = false;
       user.value = undefined;
     } catch (e: any) {
       console.log(e.response?.data?.message);
@@ -50,7 +50,6 @@ export const useUserStore = defineStore('user', () => {
     try {
       await AuthService.logout();
       localStorage.removeItem('token');
-      // isAuth.value = false;
       user.value = undefined;
     } catch (e: any) {
       console.log(e.response?.data?.message);
@@ -64,8 +63,17 @@ export const useUserStore = defineStore('user', () => {
       });
       console.log(response);
       localStorage.setItem('token', response.data.accessToken);
-      // isAuth.value = true;
       user.value = response.data.user;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function getUsers() {
+    try {
+      const response = await UserService.fetchUsers();
+      console.log(response);
+      return response.data;
     } catch (e) {
       console.log(e);
     }
@@ -73,11 +81,11 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     user,
-    // isAuth,
     login,
     registration,
     cancelRegistration,
     logout,
     checkAuth,
+    getUsers,
   };
 });

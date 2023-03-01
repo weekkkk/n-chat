@@ -6,7 +6,8 @@ import { EPosition } from '@/components/popover/enums';
 import { EColor } from '@/components/enums';
 import { useUserStore } from '@/stores/user';
 import { useRoute, useRouter } from 'vue-router';
-import { LOGIN } from '@/router/modules/names';
+import { LOGIN, CHAT, USERS } from '@/router/modules/names';
+import NInput from '@/components/input/n-input.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -29,6 +30,22 @@ function logout() {
     </div>
 
     <div class="f ai-c cg-3">
+      <NButton
+        @click="router.push({ name: CHAT })"
+        :color="EColor.Brand"
+        :no-fill="route.name != CHAT"
+        square
+      >
+        <span class="material-symbols-rounded"> mail </span>
+      </NButton>
+      <NButton
+        @click="router.push({ name: USERS })"
+        :color="EColor.Brand"
+        :no-fill="route.name != USERS"
+        square
+      >
+        <span class="material-symbols-rounded"> group </span>
+      </NButton>
       <NPopover
         v-if="userStore.user"
         width="324px"
