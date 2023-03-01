@@ -43,7 +43,10 @@ const routes: Array<RouteRecordRaw> = [
           {
             name: 'chat',
             path: 'chat',
-            component: () => import('@/pages/users-page.vue'),
+            components: {
+              dialogs: () => import('@/pages/dialogs-page.vue'),
+              messages: () => import('@/pages/messages-page.vue'),
+            },
           },
         ],
       },

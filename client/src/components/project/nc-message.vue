@@ -1,42 +1,52 @@
 <script lang="ts" setup>
 import NAvatar from '@/components/avatar/n-avatar.vue';
+import { IMessage } from '@/models/IMessage';
+import { useUserStore } from '@/stores/user';
+import { PropType } from 'vue';
+/**
+ * * Стор пользователя
+ */
+const userStor = useUserStore();
 /**
  * * Свойства
  */
 const props = defineProps({
-  /**
-   * * Имя
-   */
-  name: { type: String, default: '' },
-  /**
-   * * Сообщение
-   */
-  message: { type: String, default: '' },
+  message: { type: Object as PropType<IMessage>, default: undefined },
 });
+/**
+ * * Является ли сообщение позьзовательским
+ */
+const personal =
+  !!userStor.user &&
+  !!props.message &&
+  userStor.user.id == props.message.sender;
 </script>
 
 <template>
-  <div class="nc-dialog f ai-c cg-3">
-    <NAvatar size="48px" :name="name" />
-    <div class="info w-100 f fd-col rg-2">
-      <p class="fw-medium lh-no">
-        {{ name }}
-      </p>
-      <p class="fs-small-p lh-no c-second-75">
-        {{ message }}
+  <li class="nc-message" :class="{ personal }">
+    <div v-if="message" class="message f fd-col rg-2 px-3 py-2 br-3">
+      <p>
+        {{ message?.text }}
       </p>
     </div>
-  </div>
+  </li>
 </template>
 
 <style lang="scss" scoped>
-.nc-dialog {
-  .info {
-    overflow: hidden;
-    p {
-      text-overflow: ellipsis;
-      overflow: hidden;
+.nc-message {
+  display: flex;
+  justify-content: flex-start;
+  &.personal {
+    justify-content: flex-end;
+    .message {
+      background-color: var(--n-brand);
+      color: var(--n-default);
     }
+  }
+  .message {
+    max-width: 80%;
+    width: fit-content;
+    background-color: var(--n-second-0);
   }
 }
 </style>

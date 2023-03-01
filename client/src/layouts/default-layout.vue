@@ -10,7 +10,7 @@
 <style lang="scss">
 body {
   padding: var(--n-indent-3);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   #app {
@@ -20,11 +20,13 @@ body {
     flex-direction: column;
     row-gap: var(--n-indent-3);
     main {
+      flex-grow: 1;
+      min-height: 0;
       width: 100%;
-      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
   }
 }

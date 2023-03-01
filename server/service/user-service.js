@@ -5,7 +5,6 @@ const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
-const userModel = require('../models/user-model');
 
 class UserService {
   async registation(email, password) {
@@ -95,7 +94,7 @@ class UserService {
       throw ApiError.UnauthorizedError();
     }
 
-    const user = await userModel.findById(userData.id);
+    const user = await UserModel.findById(userData.id);
 
     if (!user) {
       throw ApiError.UnauthorizedError();
@@ -112,7 +111,7 @@ class UserService {
   }
 
   async getAllUsers() {
-    let users = await userModel.find();
+    let users = await UserModel.find();
     users = users.map((user) => {
       user = new UserDto(user);
       return user;

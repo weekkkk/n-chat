@@ -9,15 +9,15 @@ const panelVisible = ref(true);
 </script>
 
 <template>
-  <div class="base-layout f w-100 h-100 cg-3">
-    <aside class="dialogs w-100 bg-default br-3 p-3">
+  <div class="base-layout f w-100 cg-3">
+    <aside class="dialogs w-100 bg-default br-3 p-3 f fd-col rg-3">
       <RouterView name="dialogs" />
     </aside>
     <aside class="w-100 f fd-col rg-3">
       <div class="bg-default br-3 p-3">
         <RouterView name="chat" />
       </div>
-      <div class="h-100 bg-default br-3 p-3">
+      <div class="messages f fd-col bg-default br-3 p-3">
         <RouterView name="messages" />
       </div>
       <div class="bg-default br-3 p-3">
@@ -29,9 +29,16 @@ const panelVisible = ref(true);
 
 <style lang="scss" scoped>
 .base-layout {
+  overflow: hidden;
+  flex-grow: 1;
   aside {
     &.dialogs {
       max-width: 320px;
+      overflow: hidden;
+    }
+    .messages {
+      flex-grow: 1;
+      min-height: 0;
     }
   }
 }
