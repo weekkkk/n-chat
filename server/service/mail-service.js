@@ -1,4 +1,8 @@
 const nodemailer = require('nodemailer');
+
+/**
+ * * Почтовый серсис
+ */
 class MailService {
   constructor() {
     this.transporter = nodemailer.createTransport({
@@ -11,7 +15,11 @@ class MailService {
       },
     });
   }
-
+  /**
+   * * Отправить ссылку для активацию пользователя 
+   * @param to - почта, на которую отправить сообщение 
+   * @param link - ссылка, которую нужно отправить
+   */
   async sendActivationLink(to, link) {
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,

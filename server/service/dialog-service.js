@@ -1,21 +1,28 @@
 const DialogModel = require('../models/dialog-model');
 
+/**
+ * * Сервис диалога
+ */
 class DialogService {
-  async create(members, isGroup = false) {
-    const dialog = await DialogModel.create({ members, isGroup });
+  /**
+   * * Создать диалог
+   * @param users - пользователи диалога
+   */
+  async create(users) {
+    const dialog = await DialogModel.create({ users });
     return dialog;
   }
-
-  async getDialogs(user) {
-    let dialogs;
-    if (user) {
-      const membersIds = [user];
-      dialogs = await DialogModel.findOne({
-        members: {
-          $in: membersIds,
-        },
-      });
-    } else dialogs = await DialogModel.find();
+  /**
+   * * Получить диалоги пользователя
+   * @param user - id пользователя
+   */
+  async getUserDialogs(user) {
+    const userIds = [user];
+    const dialogs = await DialogModel.findOne({
+      users: {
+        $in: userIds,
+      },
+    });
     return dialogs;
   }
 }

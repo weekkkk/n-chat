@@ -4,7 +4,8 @@ const expressWs = require('express-ws');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const router = require('./router');
+const authRouter = require('./router/auth-router');
+const dialogRouter = require('./router/dialog-router');
 const errorMiddleware = require('./middlewares/error-middleware');
 
 const PORT = process.env.PORT || 5000;
@@ -20,7 +21,8 @@ app.use(
     origin: process.env.CLIENT_URL,
   })
 );
-app.use('/api', router);
+app.use('/api', authRouter);
+// app.use('/dialog-api', dialogRouter);
 app.use(errorMiddleware);
 
 // app.ws('/', function (ws, req) {

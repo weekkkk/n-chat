@@ -1,4 +1,8 @@
 const APiError = require('../exceptions/api-error');
+
+/**
+ * * Отправление ошибки на клиент
+ */
 module.exports = function (err, req, res, next) {
   console.log(err);
   if (err instanceof APiError) {

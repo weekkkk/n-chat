@@ -6,7 +6,15 @@ const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
 
+/**
+ * * Сервис пользователя
+ */
 class UserService {
+  /**
+   * * Регистрация
+   * @param email - почта
+   * @param password - пароль
+   */
   async registation(email, password) {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
@@ -33,11 +41,14 @@ class UserService {
       user: userDto,
     };
   }
-
+  /**
+   * * Отмена регистрации
+   * @param userId - id пользователя, чью регистрацию нужно отменить
+   */
   async cancelRegistartion(userId) {
     const user = await UserModel.findById(userId);
     if (!user) {
-      throw ApiError.BadRequest(`Пользователь с id ${userId} не найден`);
+      throw ApiError.BadRequest(`Пользователь с id ${user} не найден`);
     }
     if (user.isActivated) {
       throw ApiError.BadRequest(
@@ -48,7 +59,10 @@ class UserService {
     const tokenData = await tokenService.deleteUserToken(userId);
     return { userData, tokenData };
   }
-
+  /**
+   * * Активация пользователя
+   * @param activationLink - ссылка активации
+   */
   async activate(activationLink) {
     const user = await UserModel.findOne({ activationLink });
     if (!user) {
@@ -57,7 +71,11 @@ class UserService {
     user.isActivated = true;
     await user.save();
   }
-
+  /**
+   * * Авторизация
+   * @param email - почта
+   * @param password - пароль
+   */
   async login(email, password) {
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -76,12 +94,18 @@ class UserService {
       user: userDto,
     };
   }
-
+  /**
+   * * Выйти из аккаута
+   * @param refreshToken - токен пользователя
+   */
   async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken);
     return token;
   }
-
+  /**
+   * * Обновить access токен
+   * @param refreshToken - refresh токен пользователя
+   */
   async refresh(refreshToken) {
     if (!refreshToken) {
       throw ApiError.UnauthorizedError();
@@ -109,7 +133,9 @@ class UserService {
       user: userDto,
     };
   }
-
+  /**
+   * * Получить всех пользователей
+   */
   async getAllUsers() {
     let users = await UserModel.find();
     users = users.map((user) => {

@@ -3,6 +3,9 @@ const { validationResult } = require('express-validator');
 const ApiError = require('../exceptions/api-error');
 
 class UserController {
+  /**
+   * * Регистрация
+   */
   async registration(req, res, next) {
     try {
       const errors = validationResult(req);
@@ -22,7 +25,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Отмена регистрации
+   */
   async cancelRegistartion(req, res, next) {
     try {
       const { userId } = req.body;
@@ -33,7 +38,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Авторизация
+   */
   async login(req, res, next) {
     try {
       const { email, password } = req.body;
@@ -47,7 +54,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Выход из аккаунта
+   */
   async logout(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
@@ -58,7 +67,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Активация аккаунта аккаунта
+   */
   async activate(req, res, next) {
     try {
       const activationLink = req.params.link;
@@ -68,7 +79,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Обновление токенов пользователя
+   */
   async refresh(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
@@ -82,7 +95,9 @@ class UserController {
       next(e);
     }
   }
-
+  /**
+   * * Получить пользователей
+   */
   async getUsers(req, res, next) {
     try {
       const users = await userService.getAllUsers();

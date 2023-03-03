@@ -1,5 +1,14 @@
+/**
+ * * Ошибка
+ */
 module.exports = class ApiError extends Error {
+  /**
+   * * Статус
+   */
   status;
+  /**
+   * * Массив ошибок
+   */
   errors;
 
   constructor(status, message, errors = []) {

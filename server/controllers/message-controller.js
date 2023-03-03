@@ -1,30 +1,31 @@
 const messageService = require('../service/message-service');
-const { validationResult } = require('express-validator');
-const ApiError = require('../exceptions/api-error');
-
+/**
+ * * Методы сообщения
+ */
 class MessageController {
-  async create(req, res, next) {
+  /**
+   * * Отравить сообщение в диалог
+   */
+  async send(req, res, next) {
     try {
       const { dialog, text } = req.body;
-      const message = messageService.create(dialog, text);
+      const message = messageService.send(dialog, text);
       return res.json(message);
     } catch (e) {
       next(e);
     }
   }
-
-  async getMessages(req, res, next) {
+  /**
+   * * Получить сообщения диалога
+   */
+  async getDialogMessages(req, res, next) {
     try {
       const { dialog } = req.params;
-      const messages = await messageService.getMessages(dialog);
+      const messages = await messageService.getDialogMessages(dialog);
       return res.json(messages);
     } catch (e) {
       next(e);
     }
-  }
-
-  send(data, wss) {
-
   }
 }
 

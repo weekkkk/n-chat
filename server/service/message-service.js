@@ -1,15 +1,24 @@
 const MessageModel = require('../models/message-model');
 
+/**
+ * * Сервис сообщений
+ */
 class MessageService {
-  async create(dialog, text) {
+  /**
+   * * Отправить сообщение
+   * @param dialog - id диалога
+   * @param text - текст диалога
+   */
+  async send(dialog, text) {
     const message = await DialogModel.create({ dialog, text });
     return message;
   }
-
-  async getMessages(dialog) {
-    let messages;
-    if (dialog) messages = await MessageModel.findOne({ dialog });
-    else messages = await MessageModel.find();
+  /**
+   * * Получить сообщения диалога
+   * @param dialog - id диалога
+   */
+  async getDialogMessages(dialog) {
+    const messages = await MessageModel.findOne({ dialog });
     return messages;
   }
 }
