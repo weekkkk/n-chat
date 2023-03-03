@@ -10,9 +10,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/layouts/default-layout.vue'),
+    redirect: { name: 'chat' },
     children: [
       {
-        path: '',
+        path: 'forms',
         component: () => import('@/layouts/form-layout.vue'),
         redirect: { name: 'registration' },
         children: [
@@ -34,24 +35,32 @@ const routes: Array<RouteRecordRaw> = [
         ],
       },
       {
-        path: '',
+        name: 'chat',
+        path: 'chat',
         components: {
           header: () => import('@/layouts/header-layout.vue'),
           default: () => import('@/layouts/chat-layout.vue'),
         },
+        redirect: { name: 'dialog' },
         children: [
           {
-            name: 'chat',
-            path: 'chat',
+            name: 'dialog',
+            path: 'dialog/:userId',
             components: {
               dialogs: () => import('@/pages/dialogs-page.vue'),
               messages: () => import('@/pages/messages-page.vue'),
+              input: () => import('@/pages/input-page.vue'),
+            },
+            props: {
+              input: (route) => {
+                return { userId: route.params.userId };
+              },
             },
           },
         ],
       },
       {
-        path: '',
+        path: 'list',
         components: {
           header: () => import('@/layouts/header-layout.vue'),
           default: () => import('@/layouts/box-layout.vue'),

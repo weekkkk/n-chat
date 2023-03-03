@@ -22,6 +22,10 @@ class MessageController {
       next(e);
     }
   }
+
+  send(data, wss) {
+
+  }
 }
 
 module.exports = new MessageController();

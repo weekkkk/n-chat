@@ -3,27 +3,25 @@ import { AuthResponse } from '@/models/response/AuthResponse';
 import { AxiosResponse } from 'axios';
 
 export default class AuthService {
-  static async login(
+  static login(
     email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
     return $api.post<AuthResponse>('/login', { email, password });
   }
 
-  static async registration(
+  static registration(
     email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
     return $api.post<AuthResponse>('/registration', { email, password });
   }
 
-  static async cancelRegistration(
-    userId: string
-  ): Promise<AxiosResponse<void>> {
+  static cancelRegistration(userId: string): Promise<AxiosResponse<void>> {
     return $api.post('/cancelRegistration', { userId });
   }
 
-  static async logout(): Promise<void> {
+  static logout(): Promise<void> {
     return $api.post('/logout');
   }
 }

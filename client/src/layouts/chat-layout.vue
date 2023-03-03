@@ -18,7 +18,9 @@ const panelVisible = ref(true);
         <RouterView name="chat" />
       </div>
       <div class="messages f fd-col bg-default br-3 p-3">
-        <RouterView name="messages" />
+        <Suspense>
+          <RouterView name="messages" />
+        </Suspense>
       </div>
       <div class="bg-default br-3 p-3">
         <RouterView name="input" />

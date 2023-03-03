@@ -27,21 +27,27 @@ router.get('/refresh', userController.refresh);
 
 router.get('/users', authMiddleware, userController.getUsers);
 
-router.get('/dialogs/:user');
-router.get('/messages/:dialog');
+router.post('/createDialog', authMiddleware, dialogController.create);
+router.get('/dialogs/:user', authMiddleware, dialogController.getDialogs);
+router.get('/createMessage', authMiddleware, messageController.create);
+router.get('/messages/:dialog', authMiddleware, messageController.getMessages);
 
 router.ws('/ws', (ws, req) => {
   console.log('ПОДКЛЮЧЕНИЕ УСТАНОВЛЕНО');
 
   ws.on('message', (msg) => {
+    console.log(msg);
     const { event, data } = JSON.parse(msg);
 
     switch (event) {
-      case 'send-message-to-dialog':
-        messageService.create(data.dialog, data.text);
+      case 'create-dialog':
+        console.log('create-dialog', data);
+        // messageService.create(data.dialog, data.text);
         break;
-      case 'send-message-to-user':
-        messageService.create(data.dialog, data.text);
+      case 'send-message':
+        console.log('send-message', data);
+        console.log(router);
+        // messageService.create(data.dialog, data.text);
         break;
     }
     console.log(`Message: ${msg}`);

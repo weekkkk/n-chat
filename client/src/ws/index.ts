@@ -5,11 +5,12 @@ export function openWs() {
 
   ws.onopen = (event) => {
     console.log('onopen', event);
-  };
+};
 
   ws.onclose = (event) => {
     console.log('onclose', event);
   };
+
 
   return ws;
 }

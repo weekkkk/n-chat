@@ -5,6 +5,7 @@ import { useUserStore } from '@/stores/user';
 import NAvatar from '@/components/avatar/n-avatar.vue';
 import NButton from '@/components/button/n-button.vue';
 import { EColor } from '@/components/enums';
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore();
 
@@ -14,6 +15,12 @@ const setUsers = async () => {
   users.value = await userStore.getUsers();
 };
 setUsers();
+
+const router = useRouter();
+
+const goToDialog = (userId: string) => {
+  router.push({ name: 'dialog', params: { userId } });
+};
 </script>
 
 <template>
@@ -24,7 +31,7 @@ setUsers();
         {{ user.email }}
       </p>
 
-      <NButton :color="EColor.Brand" square>
+      <NButton @click="goToDialog(user.id)" :color="EColor.Brand" square>
         <span class="material-symbols-rounded"> mail </span>
       </NButton>
     </li>
