@@ -1,11 +1,10 @@
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import axios from 'axios';
 import { API_URL } from '@/http';
 import { IUser } from '@/interfaces';
 import { IAuthResponse } from '@/http/interfaces';
-import AuthService from '@/services/AuthService';
-import UserService from '@/services/UserService';
-import axios from 'axios';
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { AuthService, UserService } from '@/services';
 
 /**
  * * Стор для работы с пользователем
