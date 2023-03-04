@@ -4,20 +4,23 @@ import NButton from '@/components/button/n-button.vue';
 import NPopover from '@/components/popover/n-popover.vue';
 import { EPosition } from '@/components/popover/enums';
 import { EColor } from '@/components/enums';
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores';
 import { useRoute, useRouter } from 'vue-router';
-import { LOGIN, CHAT, USERS } from '@/router/modules/names';
-import NInput from '@/components/input/n-input.vue';
 
 const route = useRoute();
 const router = useRouter();
 
+/**
+ * * Стор пользоватля
+ */
 const userStore = useUserStore();
-
+/**
+ * * Выход
+ */
 function logout() {
   if (!userStore.user) return;
   userStore.logout().then(() => {
-    router.push({ name: LOGIN });
+    router.push({ name: 'login' });
   });
 }
 </script>
@@ -31,17 +34,17 @@ function logout() {
 
     <div class="f ai-c cg-3">
       <NButton
-        @click="router.push({ name: CHAT })"
+        @click="router.push({ name: 'chat' })"
         :color="EColor.Brand"
-        :no-fill="route.name != CHAT"
+        :no-fill="route.name != 'chat'"
         square
       >
         <span class="material-symbols-rounded"> mail </span>
       </NButton>
       <NButton
-        @click="router.push({ name: USERS })"
+        @click="router.push({ name: 'users' })"
         :color="EColor.Brand"
-        :no-fill="route.name != USERS"
+        :no-fill="route.name != 'users'"
         square
       >
         <span class="material-symbols-rounded"> group </span>
@@ -71,6 +74,7 @@ function logout() {
       </NPopover>
     </div>
   </header>
+  <RouterView />
 </template>
 
 <style lang="scss">

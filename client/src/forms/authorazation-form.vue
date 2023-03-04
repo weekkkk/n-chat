@@ -5,8 +5,7 @@ import { EType } from '@/components/input/enums';
 import NButton from '@/components/button/n-button.vue';
 import { EColor, ESize } from '@/components/enums';
 import { useRoute, useRouter } from 'vue-router';
-import { REGISTRATION, LOGIN, ACTIVATION, CHAT } from '@/router/modules/names';
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores';
 
 const route = useRoute();
 const router = useRouter();
@@ -99,7 +98,7 @@ const passwordInputType = ref<EType>(EType.Password);
   <div class="form-row g-3">
     <div class="f jc-c cg-3">
       <NButton
-        @click="router.push({ name: REGISTRATION })"
+        @click="router.push({ name: 'registration' })"
         :no-fill="!isRegistartion"
         :color="EColor.Second"
         square
@@ -107,7 +106,7 @@ const passwordInputType = ref<EType>(EType.Password);
         <span class="material-symbols-rounded"> app_registration </span>
       </NButton>
       <NButton
-        @click="router.push({ name: LOGIN })"
+        @click="router.push({ name: 'login' })"
         :no-fill="isRegistartion"
         :color="EColor.Second"
         square

@@ -4,7 +4,7 @@ import { IAuthResponse } from './interfaces';
 /**
  * * Ссылка на api
  */
-export const API_URL = 'http://localhost:4000/api';
+export const API_URL = 'http://localhost:4000/auth-api';
 
 /**
  * * Объект api

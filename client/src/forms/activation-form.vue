@@ -1,18 +1,22 @@
 <script lang="ts" setup>
 import NButton from '@/components/button/n-button.vue';
 import { EColor } from '@/components/enums';
-import { REGISTRATION } from '@/router/modules/names';
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+/**
+ * * Стор пользователя
+ */
 const userStore = useUserStore();
-
+/**
+ * * Отменить регистрацию пользователя
+ */
 function cancelRegistration() {
   if (!userStore.user) return;
   userStore.cancelRegistration(userStore.user.id).then(() => {
-    router.push({ name: REGISTRATION });
+    router.push({ name: 'registration' });
   });
 }
 </script>

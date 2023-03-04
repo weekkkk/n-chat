@@ -16,6 +16,10 @@ const useUserStore = defineStore('user', () => {
    */
   const user = ref<IUser>();
   /**
+   * * Проверялось ли авторизован пользователь или нет
+   */
+  const isAuthChecked = ref(false);
+  /**
    * * Вход
    * @param email - почта
    * @param password - пароль
@@ -75,6 +79,7 @@ const useUserStore = defineStore('user', () => {
    * * Проверка того, авторизован ли пользователь
    */
   async function checkAuth() {
+    isAuthChecked.value = true;
     try {
       const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {
         withCredentials: true,
@@ -106,6 +111,7 @@ const useUserStore = defineStore('user', () => {
     cancelRegistration,
     logout,
     checkAuth,
+    isAuthChecked,
     getUsers,
   };
 });
