@@ -21,8 +21,8 @@ app.use(
     origin: process.env.CLIENT_URL,
   })
 );
-app.use('/api', authRouter);
-// app.use('/dialog-api', dialogRouter);
+app.use('/auth-api', authRouter);
+app.use('/dialog-api', dialogRouter);
 app.use(errorMiddleware);
 
 // app.ws('/', function (ws, req) {

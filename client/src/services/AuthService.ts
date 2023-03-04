@@ -1,26 +1,43 @@
 import $api from '@/http';
-import { AuthResponse } from '@/models/response/AuthResponse';
+import { IAuthResponse } from '@/http/interfaces';
 import { AxiosResponse } from 'axios';
-
+/**
+ * * Сервис авторизации
+ */
 export default class AuthService {
-  static login(
+  /**
+   * * Вход
+   * @param email - почта
+   * @param password - пароль
+   */
+  static login (
     email: string,
     password: string
-  ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/login', { email, password });
+  ): Promise<AxiosResponse<IAuthResponse>> {
+    return $api.post<IAuthResponse>('/login', { email, password });
   }
-
+  /**
+   * * Регистрация
+   * @param email - почта
+   * @param password - пароль
+   */
   static registration(
     email: string,
     password: string
-  ): Promise<AxiosResponse<AuthResponse>> {
-    return $api.post<AuthResponse>('/registration', { email, password });
+  ): Promise<AxiosResponse<IAuthResponse>> {
+    return $api.post<IAuthResponse>('/registration', { email, password });
   }
-
+  /**
+   * * Отмена регистрации
+   * @param userId - id пользователя
+   * @returns 
+   */
   static cancelRegistration(userId: string): Promise<AxiosResponse<void>> {
     return $api.post('/cancelRegistration', { userId });
   }
-
+  /**
+   * * Выход
+   */
   static logout(): Promise<void> {
     return $api.post('/logout');
   }

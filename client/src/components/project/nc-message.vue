@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import NAvatar from '@/components/avatar/n-avatar.vue';
-import { IMessage } from '@/models/IMessage';
-import { useUserStore } from '@/stores/user';
+import { IMessage } from '@/interfaces';
+import { useUserStore } from '@/stores';
 import { PropType } from 'vue';
 /**
  * * Стор пользователя
@@ -17,9 +17,7 @@ const props = defineProps({
  * * Является ли сообщение позьзовательским
  */
 const personal =
-  !!userStor.user &&
-  !!props.message &&
-  userStor.user.id == props.message.sender;
+  !!userStor.user && !!props.message && userStor.user.id == props.message.user;
 </script>
 
 <template>

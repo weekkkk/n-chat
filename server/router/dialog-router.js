@@ -9,7 +9,7 @@ router.get('/dialogs', dialogController.getUserDialogs);
 const API_URL = '/dialog-api';
 
 // Обработчик подключения нового клиента
-router.ws('/auth-api', (ws, req) => {
+router.ws('/', (ws, req) => {
   console.log('A user connected');
 
   // Обработчик сообщений от клиента

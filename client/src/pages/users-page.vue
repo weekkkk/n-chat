@@ -1,26 +1,29 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { IUser } from '@/models/IUser';
-import { useUserStore } from '@/stores/user';
+import { IUser } from '@/interfaces';
+import { useUserStore } from '@/stores';
 import NAvatar from '@/components/avatar/n-avatar.vue';
 import NButton from '@/components/button/n-button.vue';
 import { EColor } from '@/components/enums';
 import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+/**
+ * * Стор для работы с пользователем
+ */
 const userStore = useUserStore();
-
+/**
+ * * Пользователи
+ */
 const users = ref<IUser[]>();
-
+/**
+ * * Установить пользователей
+ */
 const setUsers = async () => {
   users.value = await userStore.getUsers();
 };
 setUsers();
-
-const router = useRouter();
-
-const goToDialog = (userId: string) => {
-  router.push({ name: 'dialog', params: { userId } });
-};
 </script>
 
 <template>
@@ -31,7 +34,7 @@ const goToDialog = (userId: string) => {
         {{ user.email }}
       </p>
 
-      <NButton @click="goToDialog(user.id)" :color="EColor.Brand" square>
+      <NButton :color="EColor.Brand" square>
         <span class="material-symbols-rounded"> mail </span>
       </NButton>
     </li>
