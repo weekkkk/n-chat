@@ -13,6 +13,7 @@ const props = defineProps({
  * * Стор для работы с сообщениями
  */
 const messageStore = useMessageStore();
+messageStore.connectWs();
 /**
  * * Получить сообщения
  */

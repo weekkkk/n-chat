@@ -69,6 +69,7 @@ const routes: Array<RouteRecordRaw> = [
             },
             props: {
               messages: true,
+              input: true,
             },
           },
         ],

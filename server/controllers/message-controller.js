@@ -52,7 +52,7 @@ class MessageController {
 
       const messagesData = [];
       for (let message of messages) {
-        const userData = await userService.findUser(user);
+        const userData = await userService.findUser(message.user);
         messagesData.push(new MessageDto(message, userData));
       }
 
@@ -66,20 +66,28 @@ class MessageController {
    */
   async sendMessageToUser(ws, req, data) {
     const { recipient, text } = data;
-    recipient = new ObjectId(recipient);
+    const recipientId = new ObjectId(recipient);
 
-    const { dialog } = await dialogService.getIndividualDialog(
+    const dialog = await dialogService.getIndividualDialog(
       ws.user,
-      recipient
+      recipientId
     );
     if (!dialog) dialog = await dialogService.create([ws.user, recipient]);
-    const { message } = await messageService.create(dialog.id, user, text);
+    const message = await messageService.create(dialog.id, ws.user, text);
 
-    const recipientWs = this.wss.clients.find(
-      (client) => client.user == recipient
-    );
+    const userData = await userService.findUser(message.user);
+    const messageData = new MessageDto(message, userData);
 
-    recipientWs.send(JSON.stringify(message));
+    const wsMessage = {
+      event: 'message-to-user',
+      data: messageData,
+    };
+
+    this.wss.clients.forEach((client) => {
+      if (client.user == recipient) {
+        client.send(JSON.stringify(wsMessage));
+      }
+    });
 
     return message;
   }
