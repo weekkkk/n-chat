@@ -6,4 +6,12 @@ import AuthService from './AuthService';
  * * Сервис пользователя
  */
 import UserService from './UserService';
-export { AuthService, UserService };
+/**
+ * * Сервис диалогов
+ */
+import DialogService from './DialogService';
+/**
+ * * Сервис сообщений
+ */
+import MessageService from './MessageService';
+export { AuthService, UserService, DialogService, MessageService };

@@ -1,7 +1,7 @@
 /**
  * * Сообщение
  */
-export default interface IUser {
+export default interface IMessage {
   /**
    * * Уникальный ключ сообщения
    */

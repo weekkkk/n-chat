@@ -144,6 +144,14 @@ class UserService {
     });
     return users;
   }
+  /**
+   * * Найти пользователя
+   */
+  async findUser(id) {
+    const user = await UserModel.findById(id);
+    const userData = new UserDto(user);
+    return userData;
+  }
 }
 
 module.exports = new UserService();

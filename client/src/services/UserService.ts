@@ -1,6 +1,6 @@
-import $api from '@/http';
-import { IUser } from '@/interfaces';
 import { AxiosResponse } from 'axios';
+import $authorization from '@/api/authorization';
+import { IUser } from '@/interfaces';
 /**
  * * Сервис пользователя
  */
@@ -9,6 +9,6 @@ export default class UserService {
    * * Получить пользователей
    */
   static fetchUsers(): Promise<AxiosResponse<IUser[]>> {
-    return $api.get<IUser[]>('/users');
+    return $authorization.get<IUser[]>('/users');
   }
 }

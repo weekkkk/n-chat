@@ -4,12 +4,12 @@ import { IAuthResponse } from './interfaces';
 /**
  * * Ссылка на api
  */
-export const API_URL = 'http://localhost:4000/auth-api';
+export const API_URL = 'http://localhost:4000/authorization';
 
 /**
  * * Объект api
  */
-const $api = axios.create({
+const $authorization = axios.create({
   withCredentials: true,
   baseURL: API_URL,
 });
@@ -17,14 +17,14 @@ const $api = axios.create({
 /**
  * * Выполняется при запросе
  */
-$api.interceptors.request.use((config) => {
+$authorization.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
 /**
  * * Выполняется при ответе
  */
-$api.interceptors.response.use(
+$authorization.interceptors.response.use(
   (config) => {
     return config;
   },
@@ -41,7 +41,7 @@ $api.interceptors.response.use(
           withCredentials: true,
         });
         localStorage.setItem('token', response.data.accessToken);
-        return $api.request(originalRequest);
+        return $authorization.request(originalRequest);
       } catch (e) {
         console.log('Не авторизован');
       }
@@ -50,4 +50,4 @@ $api.interceptors.response.use(
   }
 );
 
-export default $api;
+export default $authorization;

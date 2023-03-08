@@ -7,11 +7,7 @@ const DialogSchema = new Schema({
   /**
    * * Пользователи
    */
-  users: [{ type: Schema.Types.ObjectId,ref: 'User' }],
-  /**
-   * * Сообщения
-   */
-  messages: [{ type: Schema.Types.ObjectId,ref: 'Message' }],
+  users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 module.exports = model('Dialog', DialogSchema);

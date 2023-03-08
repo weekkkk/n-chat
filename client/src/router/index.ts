@@ -52,6 +52,14 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: 'Чат',
         },
+        redirect: { name: 'dialogs' },
+        children: [
+          {
+            name: 'dialogs',
+            path: 'dialogs',
+            components: { dialogs: () => import('@/pages/dialogs-page.vue') },
+          },
+        ],
       },
       {
         name: 'information',

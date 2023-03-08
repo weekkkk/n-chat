@@ -1,9 +1,9 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { API_URL } from '@/http';
+import { API_URL } from '@/api/authorization';
 import { IUser } from '@/interfaces';
-import { IAuthResponse } from '@/http/interfaces';
+import { IAuthResponse } from '@/api/authorization/interfaces';
 import { AuthService, UserService } from '@/services';
 
 /**

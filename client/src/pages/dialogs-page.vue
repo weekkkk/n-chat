@@ -3,6 +3,11 @@ import NButton from '@/components/button/n-button.vue';
 import { EColor, ESize } from '@/components/enums';
 import NInput from '@/components/input/n-input.vue';
 import NcDialog from '@/components/project/nc-dialog.vue';
+import { useDialogStore } from '@/stores';
+
+const dialogStore = useDialogStore();
+
+dialogStore.getDialogs();
 </script>
 
 <template>
@@ -15,6 +20,13 @@ import NcDialog from '@/components/project/nc-dialog.vue';
   </NInput>
 
   <ul class="dialogs f fd-col">
+    <li class="py-2 px-3">
+      <NcDialog
+        v-for="dialog in dialogStore.dialogs"
+        :key="dialog.id"
+        :dialog="dialog"
+      />
+    </li>
   </ul>
 </template>
 
@@ -34,6 +46,13 @@ ul.dialogs {
     &:last-child {
       border-bottom-right-radius: var(--n-indent-3);
       border-bottom-left-radius: var(--n-indent-3);
+    }
+    cursor: pointer;
+    &:hover {
+      background-color: var(--n-second-0);
+    }
+    &:active {
+      background-color: var(--n-second-25);
     }
   }
 }

@@ -1,5 +1,5 @@
 const DialogModel = require('../models/dialog-model');
-
+const userModel = require('../models/user-model');
 /**
  * * Сервис диалога
  */
@@ -16,14 +16,27 @@ class DialogService {
    * * Получить диалоги пользователя
    * @param user - id пользователя
    */
-  async getUserDialogs(user) {
+  async getDialogs(user) {
     const userIds = [user];
-    const dialogs = await DialogModel.findOne({
+    const dialogs = await DialogModel.find({
       users: {
         $in: userIds,
       },
     });
     return dialogs;
+  }
+  /**
+   * * Получить диалог по пользователям
+   * @param users - массив id пользователей
+   */
+  async getIndividualDialog(sender, recipient) {
+    const dialog = await DialogModel.findOne({
+      $and: [
+        { users: { $all: [sender, recipient] } },
+        { users: { $size: 2 } },
+      ],
+    });
+    return dialog;
   }
 }
 
