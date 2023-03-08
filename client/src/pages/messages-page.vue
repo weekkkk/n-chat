@@ -1,7 +1,32 @@
-<script lang="ts" async setup></script>
+<script lang="ts" setup>
+import NcMessage from '@/components/project/nc-message.vue';
+import { useMessageStore } from '@/stores';
+
+const props = defineProps({
+  /**
+   * * Получатель
+   */
+  recipient: { type: String, default: '' },
+});
+
+/**
+ * * Стор для работы с сообщениями
+ */
+const messageStore = useMessageStore();
+/**
+ * * Получить сообщения
+ */
+messageStore.getIndividualDialogMessages(props.recipient);
+</script>
 
 <template>
-  <ul class="messages f fd-col h-100"></ul>
+  <ul class="messages rg-2 f fd-col h-100">
+    <NcMessage
+      v-for="message in messageStore.messages"
+      :key="message.id"
+      :message="message"
+    />
+  </ul>
 </template>
 
 <style lang="scss" scoped>

@@ -11,8 +11,6 @@ export default class UserService {
   static getIndividualMessages(
     recipient: string
   ): Promise<AxiosResponse<IMessage[]>> {
-    return $message.get<IMessage[]>('/individualDialogMessages', {
-      params: { recipient },
-    });
+    return $message.get<IMessage[]>(`/individualDialogMessages/${recipient}`);
   }
 }

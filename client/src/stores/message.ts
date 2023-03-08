@@ -20,6 +20,7 @@ const useMessageStore = defineStore('message', () => {
    */
   async function getIndividualDialogMessages(recipient: string) {
     try {
+      console.log({ recipient });
       const response = await MessageService.getIndividualMessages(recipient);
       console.log(response);
       messages.value = response.data;

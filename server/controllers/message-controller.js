@@ -4,6 +4,8 @@ const tokenService = require('../service/token-service');
 const dialogService = require('../service/dialog-service');
 const { ObjectId } = require('mongodb');
 const ApiError = require('../exceptions/api-error');
+const MessageDto = require('../dtos/message-dto');
+const userService = require('../service/user-service');
 /**
  * * Методы сообщения
  */
@@ -38,15 +40,23 @@ class MessageController {
       const { user } = await tokenService.findToken(refreshToken);
       if (!user) throw new ApiError.UnauthorizedError();
 
-      const { dialog } = await dialogService.getIndividualDialog(
-        user,
-        recipient
-      );
-      if (!dialog) throw new ApiError.BadRequest();
+      console.log({ user, recipient });
+
+      const dialog = await dialogService.getIndividualDialog(user, recipient);
+      if (!dialog)
+        return next(
+          ApiError.BadRequest('Диалог с данными пользователями не найден')
+        );
 
       const messages = await messageService.getMessages(dialog);
 
-      return res.json(messages);
+      const messagesData = [];
+      for (let message of messages) {
+        const userData = await userService.findUser(user);
+        messagesData.push(new MessageDto(message, userData));
+      }
+
+      return res.json(messagesData);
     } catch (e) {
       next(e);
     }
@@ -58,7 +68,10 @@ class MessageController {
     const { recipient, text } = data;
     recipient = new ObjectId(recipient);
 
-    const { dialog } = await dialogService.getIndividualDialog(ws.user, recipient);
+    const { dialog } = await dialogService.getIndividualDialog(
+      ws.user,
+      recipient
+    );
     if (!dialog) dialog = await dialogService.create([ws.user, recipient]);
     const { message } = await messageService.create(dialog.id, user, text);
 

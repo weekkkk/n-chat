@@ -17,7 +17,9 @@ const props = defineProps({
  * * Является ли сообщение позьзовательским
  */
 const personal =
-  !!userStor.user && !!props.message && userStor.user.id == props.message.user;
+  !!userStor.user &&
+  !!props.message &&
+  userStor.user.id == props.message.user.id;
 </script>
 
 <template>

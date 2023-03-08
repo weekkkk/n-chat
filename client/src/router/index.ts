@@ -59,6 +59,18 @@ const routes: Array<RouteRecordRaw> = [
             path: 'dialogs',
             components: { dialogs: () => import('@/pages/dialogs-page.vue') },
           },
+          {
+            name: 'dialog',
+            path: 'dialog/:recipient',
+            components: {
+              dialogs: () => import('@/pages/dialogs-page.vue'),
+              messages: () => import('@/pages/messages-page.vue'),
+              input: () => import('@/pages/input-page.vue'),
+            },
+            props: {
+              messages: true,
+            },
+          },
         ],
       },
       {

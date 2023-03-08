@@ -17,7 +17,7 @@ class MessageService {
    * @param dialog - id диалога
    */
   async getMessages(dialog) {
-    const messages = await MessageModel.findOne({ dialog });
+    const messages = await MessageModel.find({ dialog });
     return messages;
   }
 
