@@ -1,7 +1,7 @@
 :root {
     // PADDING LEFT
     .pl-0 {
-        padding-left: var(--n-indent-0);
+        padding-left: var(--n-indent-0) !important;
     }
     .pl-1 {
         padding-left: var(--n-indent-1);

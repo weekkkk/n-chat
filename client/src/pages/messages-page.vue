@@ -21,7 +21,7 @@ messageStore.getIndividualDialogMessages(props.recipient);
 </script>
 
 <template>
-  <ul class="messages rg-2 f fd-col h-100">
+  <ul class="messages rg-2 f fd-col h-100 py-2 px-3">
     <NcMessage
       v-for="message in messageStore.messages"
       :key="message.id"

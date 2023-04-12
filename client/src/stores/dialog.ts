@@ -13,7 +13,7 @@ const useDialogStore = defineStore('dialog', () => {
   /**
    * * Соообщения
    */
-  const dialogs = ref<IDialog[]>();
+  const dialogs = ref<IDialog[]>([]);
 
   /**
    * * Получить диалоги

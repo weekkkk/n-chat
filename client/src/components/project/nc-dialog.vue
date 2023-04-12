@@ -20,14 +20,14 @@ const { user } = useUserStore();
 
 <template>
   <div class="nc-dialog f ai-c cg-3" v-if="dialog">
-    <NAvatar size="48px" :name="dialog.users[0].email.toString()" />
+    <NAvatar size="40px" :name="dialog.users[0].email.toString()" />
     <div class="info w-100 f fd-col rg-2">
       <p class="fw-medium">
         {{ dialog.users[0].email.toString() }}
       </p>
-      <p class="fs-small-p lh-no c-second-75">
-        <!-- {{ message }} -->
-      </p>
+      <!-- <p class="fs-small-p lh-no c-second-75">
+        {{ message }}
+      </p> -->
     </div>
   </div>
 </template>

@@ -26,7 +26,7 @@ function logout() {
 </script>
 
 <template>
-  <header class="header-layout bg-default p-3 f ai-c jc-sb br-3">
+  <header class="header-layout bg-default py-2 px-3 f ai-c jc-sb br-2">
     <div class="f ai-c g-3">
       <h3 class="lh-no">n<span class="c-brand">chat</span></h3>
       <h2 class="lh-no ta-c">{{ route.meta.title }}</h2>

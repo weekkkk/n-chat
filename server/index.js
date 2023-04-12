@@ -27,12 +27,6 @@ app.use('/dialog', dialogRouter);
 app.use('/message', messageRouter(wsInstance));
 app.use(errorMiddleware);
 
-// app.ws('/', function (ws, req) {
-//   console.log('ПОДКЛЮЧЕНИЕ УСТАНОВЛЕНО');
-//   ws.on('connection', function () {});
-//   console.log('socket', req.testing);
-// });
-
 const start = async () => {
   try {
     mongoose.set('strictQuery', false);

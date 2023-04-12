@@ -84,7 +84,7 @@ class MessageController {
     };
 
     this.wss.clients.forEach((client) => {
-      if (client.user == recipient) {
+      if (client.user == recipient || client.user == ws.user) {
         client.send(JSON.stringify(wsMessage));
       }
     });

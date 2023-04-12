@@ -64,10 +64,12 @@ const routes: Array<RouteRecordRaw> = [
             path: 'dialog/:recipient',
             components: {
               dialogs: () => import('@/pages/dialogs-page.vue'),
+              recipient: () => import('@/pages/recipient-page.vue'),
               messages: () => import('@/pages/messages-page.vue'),
               input: () => import('@/pages/input-page.vue'),
             },
             props: {
+              recipient: true,
               messages: true,
               input: true,
             },
